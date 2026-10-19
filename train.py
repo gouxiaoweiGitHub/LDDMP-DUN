@@ -22,11 +22,6 @@ def train_epoch(model, loss, train_loader, optimizer, device, epoch, global_scal
             pred_loss = loss(real_s, pred_s)
             pred_loss.backward()
 
-            # for name, param in model.named_parameters():
-            #     if param.grad is not None:
-            #         grad_norm = param.grad.norm().item()
-            #         if grad_norm < 1e-6:
-            #             print(f"  ⚠️ {name} 梯度全为零！")
             torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
             optimizer.step()
 
